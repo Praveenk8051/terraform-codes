@@ -52,5 +52,5 @@ output "vpc_security_group_ids" {
 output "connection_command" {
   description = "SSH command to connect to the instance (when available)"
   value       = var.create_key_pair ? "ssh -i ${module.key_pair[0].private_key_path} ec2-user@${module.ec2.instance_public_ip}" : "Use your own key to connect"
-  sensitive   = false
+  sensitive   = true
 }

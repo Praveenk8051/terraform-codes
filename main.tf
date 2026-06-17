@@ -37,16 +37,16 @@ locals {
 module "ec2" {
   source = "./modules/ec2"
 
-  ami_id              = var.ami_id
-  instance_type       = var.instance_type
-  instance_name       = var.instance_name
-  key_name            = var.create_key_pair ? module.key_pair[0].key_pair_name : null
-  security_group_ids  = [module.security_group.security_group_id]
-  user_data           = local.user_data_script
-  monitoring_enabled  = true
-  ebs_optimized       = false
-  root_volume_type    = "gp2"
-  root_volume_size    = 20
+  ami_id                = var.ami_id
+  instance_type         = var.instance_type
+  instance_name         = var.instance_name
+  key_name              = var.create_key_pair ? module.key_pair[0].key_pair_name : null
+  security_group_ids    = [module.security_group.security_group_id]
+  user_data             = local.user_data_script
+  monitoring_enabled    = true
+  ebs_optimized         = false
+  root_volume_type      = "gp2"
+  root_volume_size      = 20
   root_volume_encrypted = false
 
   tags = var.tags

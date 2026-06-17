@@ -100,8 +100,8 @@ variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
   default = {
-    Project     = "terraform-localstack-demo"
-    CreatedBy   = "Terraform"
-    ManagedBy   = "IaC"
+    Project   = "terraform-localstack-demo"
+    CreatedBy = "Terraform"
+    ManagedBy = "IaC"
   }
 }

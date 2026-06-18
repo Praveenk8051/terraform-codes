@@ -15,7 +15,7 @@ provider "aws" {
 
   # LocalStack configuration
   endpoints {
-    ec2 = var.localstack_endpoint
+    s3 = var.localstack_endpoint
   }
 
   # Skip validation for LocalStack

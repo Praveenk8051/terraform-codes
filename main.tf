@@ -28,3 +28,73 @@ module "s3" {
   enable_logging = true
   logging_bucket = "access-logs"
 }
+
+module "rbac" {
+  source = "../../modules/iam-rbac"
+
+  users = {
+    alice = {}
+    bob   = {}
+    john  = {}
+  }
+
+  groups = {
+    developers = {
+      users = ["alice", "bob"]
+    }
+
+    admins = {
+      users = ["john"]
+    }
+  }
+
+  policies = {
+    developer-policy = {
+      description = "Developer access"
+
+      document = jsonencode({
+        Version = "2012-10-17"
+
+        Statement = [
+          {
+            Effect = "Allow"
+            Action = [
+              "s3:*"
+            ]
+            Resource = "*"
+          }
+        ]
+      })
+    }
+  }
+
+  roles = {
+    EKSAdminRole = {
+      assume_role_policy = jsonencode({
+        Version = "2012-10-17"
+
+        Statement = [{
+          Effect = "Allow"
+
+          Principal = {
+            Service = "ec2.amazonaws.com"
+          }
+
+          Action = "sts:AssumeRole"
+        }]
+      })
+    }
+  }
+
+  group_policy_attachments = {
+    developers = [
+      "developer-policy"
+    ]
+  }
+
+  role_policy_attachments = {
+    EKSAdminRole = [
+      "developer-policy"
+    ]
+  }
+}

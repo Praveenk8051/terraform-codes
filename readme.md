@@ -452,3 +452,36 @@ For issues or questions:
 3. Enable Terraform debug: `TF_LOG=DEBUG terraform apply`
 4. Consult [LocalStack Issues](https://github.com/localstack/localstack/issues)
 5. Check [Terraform Issues](https://github.com/hashicorp/terraform-provider-aws/issues)
+
+
+iam-rbac
+
+Use Case
+
+```
+Developers Group
+ ├── Alice
+ ├── Bob
+
+Admins Group
+ ├── John
+
+ReadOnly Group
+ ├── Sarah
+```
+
+ Policies
+
+```
+DeveloperPolicy
+AdminPolicy
+ReadOnlyPolicy
+```
+
+Roles
+
+```
+EKSAdminRole
+S3ReadRole
+CrossAccountRole
+```
